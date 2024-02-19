@@ -35,6 +35,20 @@ public class UserService {
 		repo.deleteById(id);
 	}
 	
+	public User update(User obj) {
+		// buscar o objeto na base de dados
+		// atualizar o objeto e salvar na base
+		User newObj = findById(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
+	}
+	
+	private void updateData(User newObj, User obj) {
+		// copiar dados de obj para newObj
+		newObj.setName(obj.getName());
+		newObj.setEmail(obj.getEmail());
+	}
+
 	public User fromDTO(UserDTO objDto) {
 		/* 
 		 * poderia estar na classe UserDTO mas aqui fica mais fácil a manutenção visto que o Service tem acesso 

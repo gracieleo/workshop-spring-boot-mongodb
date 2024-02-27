@@ -1,5 +1,6 @@
 package com.estudos.workshopmongo.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,4 +27,8 @@ public class PostService {
 		//return repo.findByTitleContainingIgnoreCase(text); //query method
 	}
 	
+	public List<Post> fullSearch(String text, Date minDate, Date maxDate){
+		maxDate = new Date(maxDate.getTime() + 24 * 60 * 60 * 1000); // add 1 dia a data atual
+		return repo.fullSearch(text, minDate, maxDate);
+	}
 }
